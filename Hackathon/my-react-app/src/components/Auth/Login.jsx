@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Input, VStack, Heading } from '@chakra-ui/react';
+import { Box, Button, TextField, Typography, Container } from '@mui/material';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -17,28 +17,34 @@ function Login() {
   };
 
   return (
-    <Box p={4} maxW="md" mx="auto">
-      <Heading mb={6}>Login</Heading>
-      <form onSubmit={handleLogin}>
-        <VStack spacing={4}>
-          <Input
+    <Container maxWidth="sm">
+      <Box mt={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Login
+        </Typography>
+        <form onSubmit={handleLogin}>
+          <TextField
+            label="Email"
             type="email"
-            placeholder="Email"
+            fullWidth
+            margin="normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
+          <TextField
+            label="Password"
             type="password"
-            placeholder="Password"
+            fullWidth
+            margin="normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button type="submit" colorScheme="teal" width="full">
+          <Button type="submit" variant="contained" color="primary" fullWidth>
             Login
           </Button>
-        </VStack>
-      </form>
-    </Box>
+        </form>
+      </Box>
+    </Container>
   );
 }
 

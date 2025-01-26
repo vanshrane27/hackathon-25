@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Input, Select, VStack, Heading } from '@chakra-ui/react';
+import { Box, Button, TextField, Select, MenuItem, Typography, Container } from '@mui/material';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/auth/register', { email, password, role });
+      const response = await axios.post('http://localhost:5000/api/auth/register', { email, password, role });
       console.log(response.data);
     } catch (error) {
       console.error(error.response.data);
@@ -18,32 +18,43 @@ function Register() {
   };
 
   return (
-    <Box p={4} maxW="md" mx="auto">
-      <Heading mb={6}>Register</Heading>
-      <form onSubmit={handleRegister}>
-        <VStack spacing={4}>
-          <Input
+    <Container maxWidth="sm">
+      <Box mt={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Register
+        </Typography>
+        <form onSubmit={handleRegister}>
+          <TextField
+            label="Email"
             type="email"
-            placeholder="Email"
+            fullWidth
+            margin="dense"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
+          <TextField
+            label="Password"
             type="password"
-            placeholder="Password"
+            fullWidth
+            margin="dense"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="customer">Customer</option>
-            <option value="provider">Service Provider</option>
+          <Select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            fullWidth
+            margin="dense"
+          >
+            <MenuItem value="customer">Customer</MenuItem>
+            <MenuItem value="provider">Service Provider</MenuItem>
           </Select>
-          <Button type="submit" colorScheme="teal" width="full">
+          <Button type="submit" variant="contained" color="primary" fullWidth>
             Register
           </Button>
-        </VStack>
-      </form>
-    </Box>
+        </form>
+      </Box>
+    </Container>
   );
 }
 

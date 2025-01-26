@@ -1,10 +1,12 @@
 import React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Typography } from '@mui/material';
 
 function Profile() {
   return (
     <Box p={4}>
-      <Heading>Profile Page</Heading>
+      <Typography variant="h4" component="h1">
+        Profile Page
+      </Typography>
     </Box>
   );
 }

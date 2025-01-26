@@ -1,6 +1,6 @@
-// filepath: src/components/Profile/CustomerProfile.jsx
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Box, Button, TextField, Typography, Container } from '@mui/material';
 
 function CustomerProfile({ userId }) {
   const [profile, setProfile] = useState({});
@@ -33,21 +33,34 @@ function CustomerProfile({ userId }) {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <form onSubmit={handleUpdate}>
-      <input
-        type="text"
-        placeholder="Name"
-        value={profile.name || ''}
-        onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={profile.email || ''}
-        onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-      />
-      <button type="submit">Update Profile</button>
-    </form>
+    <Container maxWidth="sm">
+      <Box mt={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Customer Profile
+        </Typography>
+        <form onSubmit={handleUpdate}>
+          <TextField
+            label="Name"
+            type="text"
+            fullWidth
+            margin="normal"
+            value={profile.name || ''}
+            onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            margin="normal"
+            value={profile.email || ''}
+            onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+          />
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            Update Profile
+          </Button>
+        </form>
+      </Box>
+    </Container>
   );
 }
 

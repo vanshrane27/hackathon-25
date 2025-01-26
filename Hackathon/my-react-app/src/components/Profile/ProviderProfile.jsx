@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box, Button, Input, VStack, Heading } from '@chakra-ui/react';
+import { Box, Button, TextField, Typography, Container } from '@mui/material';
 
 function ProviderProfile({ userId }) {
   const [profile, setProfile] = useState({});
@@ -33,34 +33,42 @@ function ProviderProfile({ userId }) {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <Box p={4} maxW="md" mx="auto">
-      <Heading mb={6}>Provider Profile</Heading>
-      <form onSubmit={handleUpdate}>
-        <VStack spacing={4}>
-          <Input
+    <Container maxWidth="sm">
+      <Box mt={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Provider Profile
+        </Typography>
+        <form onSubmit={handleUpdate}>
+          <TextField
+            label="Name"
             type="text"
-            placeholder="Name"
+            fullWidth
+            margin="normal"
             value={profile.name || ''}
             onChange={(e) => setProfile({ ...profile, name: e.target.value })}
           />
-          <Input
+          <TextField
+            label="Email"
             type="email"
-            placeholder="Email"
+            fullWidth
+            margin="normal"
             value={profile.email || ''}
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
-          <Input
+          <TextField
+            label="Service"
             type="text"
-            placeholder="Service"
+            fullWidth
+            margin="normal"
             value={profile.service || ''}
             onChange={(e) => setProfile({ ...profile, service: e.target.value })}
           />
-          <Button type="submit" colorScheme="teal" width="full">
+          <Button type="submit" variant="contained" color="primary" fullWidth>
             Update Profile
           </Button>
-        </VStack>
-      </form>
-    </Box>
+        </form>
+      </Box>
+    </Container>
   );
 }
 
